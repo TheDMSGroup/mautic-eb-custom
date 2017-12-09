@@ -89,6 +89,7 @@ html body #app-wrapper .app-sidebar .sidebar-header .mautic-brand {
   -o-transition: all .4s ease-in-out;
   transition: all .4s ease-in-out;
 }
+
 // Collapsed logo treatment.
 html.sidebar-minimized body #app-wrapper .app-sidebar .sidebar-header .mautic-brand {
   background-size: 140px;
@@ -105,24 +106,28 @@ html.sidebar-minimized body #app-wrapper .app-sidebar .sidebar-header .mautic-br
 footer#app-footer .row .text-muted:nth-child(1) {
   visibility: hidden;
 }
+
 footer#app-footer .row .text-muted:nth-child(1):before {
   content: 'Copyright 2017 Digital Media Solutions';
   visibility: visible;
 }
+
 footer#app-footer .row .text-right:before {
   content: 'Running Mautic';
   display: inline-block;
   padding-right: 6px;
 }
+
 // Hide the main menu item: Companies
 #mautic_company_index {
-  display: none;
+  //display: none;
 }
 
 // Override styles with missing/poor variable inclusion:
 .fr-toolbar {
   border-top: 2px solid @mautic-tertiary;
 }
+
 // Sidebar highlights to white.
 html body .app-sidebar.sidebar-left .nav-sidebar > .nav > li.active > a,
 html body .app-sidebar.sidebar-left .nav-sidebar > .nav > li.open > a,
@@ -130,6 +135,13 @@ html body .app-sidebar .nav-sidebar > .nav > li.open > a .icon,
 html body .app-sidebar .nav-sidebar > .nav > li.active > a .icon {
   color: #ffffff;
 }
+
 html body .app-sidebar .nav-sidebar > .nav > li > .nav-submenu > li.active:after {
   background-color: #fff !important;
+}
+
+// Hide Clippy/Mautibot
+.mautibot-image,
+.mautibot-image img {
+  display: none;
 }
