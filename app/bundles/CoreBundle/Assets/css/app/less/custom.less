@@ -137,8 +137,36 @@ body .atlwdg-trigger.atlwdg-SUBTLE {
   border-radius: 3px;
   z-index: 1000;
 }
-html.sidebar-minimized .atlwdg-trigger.atlwdg-SUBTLE {
-
+body .atlwdg-trigger.atlwdg-SUBTLE {
+  font-size: 14px;
+  min-width: 0px;
+}
+// Static width when there is a side-nav
+body.header-fixed .atlwdg-trigger.atlwdg-SUBTLE {
+  min-width: 177px;
+  -webkit-transition: min-width .3s;
+  -moz-transition: min-width .3s;
+  -ms-transition: min-width .3s;
+  -o-transition: min-width .3s;
+  transition: min-width .3s;
+}
+body .atlwdg-trigger.atlwdg-SUBTLE:before {
+  font-family: 'FontAwesome';
+  font-size: 13px;
+  padding: 0 20px 0 5px;
+  // fa-exclamation-circle
+  content: "\f06a";
+}
+html.sidebar-minimized body .atlwdg-trigger.atlwdg-SUBTLE {
+  width: 57px;
+  min-width: auto;
+  text-indent: -1000px;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+}
+html.sidebar-minimized body .atlwdg-trigger.atlwdg-SUBTLE:before {
+  font-size: 20px;
+  left: 1000px;
+  position: relative;
 }
 
 // Hide mautibot quote and broken issue generating link for 400/500 pages.
