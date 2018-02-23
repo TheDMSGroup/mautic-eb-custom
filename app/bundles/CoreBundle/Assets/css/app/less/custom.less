@@ -58,7 +58,7 @@ footer#app-footer .row .text-muted:nth-child(1) {
 }
 body #main .container .row .col-lg-4.col-lg-offset-4.text-center.text-muted:before,
 footer#app-footer .row .text-muted:nth-child(1):before {
-  content: 'Copyright 2017 Digital Media Solutions';
+  content: 'Copyright 2018 Digital Media Solutions';
   visibility: visible;
   font-size: 10px;
 }
@@ -129,10 +129,20 @@ body .atlwdg-trigger.atlwdg-SUBTLE {
   border-right: none;
   background-color: @dms-1;
   color: rgba(255, 255, 255, 0.5) !important;
-  font-size: 13px;
+  font-size: 14px;
+  font-weight: 400;
   padding: 6px 12px;
   -webkit-box-shadow: none;
   box-shadow: none;
   border-radius: 3px;
   z-index: 1000;
+}
+html.sidebar-minimized .atlwdg-trigger.atlwdg-SUBTLE {
+
+}
+
+// Hide mautibot quote and broken issue generating link for 400/500 pages.
+body div.mautibot-content.col-xs-8.col-md-9 div.pull-right a.text-muted,
+body div.mautibot-content.col-xs-8.col-md-9 blockquote footer.text-right {
+  display: none;
 }
