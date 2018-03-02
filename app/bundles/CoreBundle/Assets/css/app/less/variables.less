@@ -1,74 +1,71 @@
 //
 // Variables
 // --------------------------------------------------
-
 //== Bootstrap variable
 //
 //## import bootstrap variable.
 @import "../../libraries/bootstrap/less/variables.less";
 
 // DMS Colors from our brand guideline.
-@dms-1:                                     #2a84c5;
-@dms-2:                                     #000000;
-@dms-3:                                     #467ca2;
-@dms-4:                                     #cb4641;
-@dms-5:                                     #d9e4ec;
+@dms-1: #2a84c5;
+@dms-2: #000000;
+@dms-3: #467ca2;
+@dms-4: #cb4641;
+@dms-5: #d9e4ec;
 
 // Stock logo colors (irrelevant)
-@mautic-logo-figure-width:                  32px;
-@mautic-logo-figure-circle-fill:            #ffffff;
-@mautic-logo-figure-m-fill:                 @brand-warning;
-@mautic-logo-text-width:                    98px;
-@mautic-logo-text-fill:                     #ffffff;
+@mautic-logo-figure-width: 32px;
+@mautic-logo-figure-circle-fill: #ffffff;
+@mautic-logo-figure-m-fill: @brand-warning;
+@mautic-logo-text-width: 98px;
+@mautic-logo-text-fill: #ffffff;
 
 // Brand Colors
-@brand-primary:                             @dms-3;
-@brand-success:                             @dms-1;
-@brand-info:                                @dms-2;
-@brand-danger:                              @dms-4;
-@brand-warning:                             lighten(@dms-4, 20%);
+@brand-primary: @dms-3;
+@brand-success: @dms-1;
+@brand-info: @dms-2;
+@brand-danger: @dms-4;
+@brand-warning: lighten(@dms-4, 20%);
 
-@mautic-primary:							@brand-primary;
-@mautic-secondary:							@brand-success;
-@mautic-tertiary:							@brand-info;
+@mautic-primary: @brand-primary;
+@mautic-secondary: @brand-success;
+@mautic-tertiary: @brand-info;
 
 //== Header layout
 //
 //## common main header variable.
-@header-bg:                                 #ffffff;
-@header-height:                             60px;
-@header-zindex:                             @zindex-navbar + 5; // 1005
-
+@header-bg: #ffffff;
+@header-height: 60px;
+@header-zindex: @zindex-navbar + 5; // 1005
 
 //== Sidebar layout
 //
 //## common main sidebar variable.
-@sidebar-zindex:                           (@header-zindex - 20 + 5);  // 990
+@sidebar-zindex: (@header-zindex - 20 + 5); // 990
 //** left sidebar option
-@sidebar-left-bg:                           @brand-success;
-@sidebar-left-header-bg:                    @brand-success;
-@sidebar-left-width:                        180px;
-@sidebar-left-collapse-width:               60px;
-@sidebar-left-dark:							@brand-success;
+@sidebar-left-bg: @brand-success;
+@sidebar-left-header-bg: @brand-success;
+@sidebar-left-width: 180px;
+@sidebar-left-collapse-width: 60px;
+@sidebar-left-dark: @brand-success;
 
 //** right sidebar option - coming soon
-@sidebar-right-bg:                          @sidebar-left-bg;
-@sidebar-right-header-bg:                   lighten(@sidebar-right-bg, 3%);
-@sidebar-right-width:                       180px;
-
+@sidebar-right-bg: @sidebar-left-bg;
+@sidebar-right-header-bg: lighten(@sidebar-right-bg, 3%);
+@sidebar-right-width: 180px;
 
 //== Content layout
 //
 //## common main content variable.
-@content-zindex:                            (@header-zindex - 10 + 5);  // 1000
-@content-bg:                                #f8f8f8;
+@content-zindex: (@header-zindex - 10 + 5); // 1000
+@content-bg: #f8f8f8;
 
 //== Footer layout
 //
 //## common footer variable.
-@footer-height:                             46px;
-@footer-bg:                                 lighten(@body-bg, 1%);
-@footer-zindex:                             @content-zindex;  // 1000
+@footer-height: 46px;
+@footer-bg: lighten(@body-bg, 1%);
+@footer-zindex: @content-zindex; // 1000
 
 // Hide the standard inline svg Mautic logo.
 body #app-wrapper .app-sidebar .sidebar-header .mautic-brand svg,
@@ -99,6 +96,7 @@ body #app-wrapper .app-sidebar .sidebar-header .mautic-brand {
   position: relative;
   left: -2px;
 }
+
 // Logo positioning for internal pages.
 body #app-wrapper .app-sidebar .sidebar-header .mautic-brand {
   background-size: 156px;
@@ -110,7 +108,6 @@ body #app-wrapper .app-sidebar .sidebar-header .mautic-brand {
   -o-transition: all .3s;
   transition: all .3s;
 }
-
 
 //// Collapsed logo treatment.
 html.sidebar-minimized body #app-wrapper .app-sidebar .sidebar-header .mautic-brand {
@@ -128,21 +125,50 @@ body #main .container .row .col-lg-4.col-lg-offset-4.text-center.text-muted,
 footer#app-footer .row .text-muted:nth-child(1) {
   visibility: hidden;
 }
+
 body #main .container .row .col-lg-4.col-lg-offset-4.text-center.text-muted:before,
 footer#app-footer .row .text-muted:nth-child(1):before {
-  content: 'Copyright 2018 Digital Media Solutions';
+  content: 'Copyright © 2018 Digital Media Solutions Group';
   visibility: visible;
   font-size: 10px;
 }
+
+footer#app-footer .row .text-right {
+  font-size: 10px;
+}
+footer#app-footer .row .text-right:hover:before {
+  -webkit-transition: all .3s;
+  -moz-transition: all .3s;
+  -ms-transition: all .3s;
+  -o-transition: all .3s;
+  transition: all .3s;
+  opacity: 1;
+}
 footer#app-footer .row .text-right:before {
+  -webkit-transition: all .3s;
+  -moz-transition: all .3s;
+  -ms-transition: all .3s;
+  -o-transition: all .3s;
+  transition: all .3s;
+  opacity: 0;
   content: 'Running Mautic';
   display: inline-block;
   padding-right: 6px;
+  font-size: 10px;
 }
 
-// Hide the main menu item: Companies
-#mautic_company_index {
+// Some items in the main menu we wish to hide to keep the navigation simple.
+html:not(.hidden-nav) body .nav-sidebar #mautic_calendar_index,
+html:not(.hidden-nav) body .nav-sidebar #mautic_company_index,
+html:not(.hidden-nav) body .nav-sidebar #mautic_components_root,
+html:not(.hidden-nav) body .nav-sidebar #mautic_channels_root,
+html:not(.hidden-nav) body .nav-sidebar #mautic_points_root,
+html:not(.hidden-nav) body .nav-sidebar #mautic_stage_index {
   //display: none;
+  opacity: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
 }
 
 // Override styles with missing/poor variable inclusion:
@@ -178,6 +204,7 @@ html body .app-sidebar .nav-sidebar > .nav > li > a .icon {
   transition: all .3s;
   font-size: @font-size-base;
 }
+
 html.sidebar-minimized body .app-sidebar .nav-sidebar > .nav > li > a .icon {
   font-size: 20px;
 }
@@ -192,6 +219,7 @@ body .atlwdg-trigger.atlwdg-SUBTLE:hover {
   background-color: @brand-danger;
   color: rgba(255, 255, 255, 1) !important;
 }
+
 body .atlwdg-trigger.atlwdg-SUBTLE {
   left: 1px;
   right: auto;
@@ -209,10 +237,12 @@ body .atlwdg-trigger.atlwdg-SUBTLE {
   border-radius: 3px;
   z-index: 1000;
 }
+
 body .atlwdg-trigger.atlwdg-SUBTLE {
   font-size: 14px;
   min-width: 0px;
 }
+
 // Static width when there is a side-nav
 body.header-fixed .atlwdg-trigger.atlwdg-SUBTLE {
   min-width: 177px;
@@ -222,6 +252,7 @@ body.header-fixed .atlwdg-trigger.atlwdg-SUBTLE {
   -o-transition: min-width .3s;
   transition: min-width .3s;
 }
+
 body .atlwdg-trigger.atlwdg-SUBTLE:before {
   font-family: 'FontAwesome';
   font-size: 13px;
@@ -229,12 +260,14 @@ body .atlwdg-trigger.atlwdg-SUBTLE:before {
   // fa-exclamation-circle
   content: "\f06a";
 }
+
 html.sidebar-minimized body .atlwdg-trigger.atlwdg-SUBTLE {
   width: 57px;
   min-width: auto;
   text-indent: -1000px;
   font-family: "Open Sans", Helvetica, Arial, sans-serif;
 }
+
 html.sidebar-minimized body .atlwdg-trigger.atlwdg-SUBTLE:before {
   font-size: 20px;
   left: 1000px;
@@ -245,4 +278,42 @@ html.sidebar-minimized body .atlwdg-trigger.atlwdg-SUBTLE:before {
 body div.mautibot-content.col-xs-8.col-md-9 div.pull-right a.text-muted,
 body div.mautibot-content.col-xs-8.col-md-9 blockquote footer.text-right {
   display: none;
+}
+
+/* Styles of statuspage.io widget we'll be embedding for system health */
+#widget-statuspage {
+  margin-left: 4px;
+}
+
+#widget-statuspage .color-dot {
+  border-radius: 9px;
+  -webkit-border-radius: 9px;
+  -moz-border-radius: 9px;
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 2px;
+}
+
+#widget-statuspage .color-dot.critical {
+  background-color: #c3491c;
+}
+
+#widget-statuspage .color-dot.major {
+  background-color: #F15A22;
+}
+
+#widget-statuspage .color-dot.minor {
+  background-color: #F8B333;
+}
+
+#widget-statuspage .color-dot.none {
+  background-color: #A2D06B;
+}
+
+#widget-statuspage .color-description {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 80%;
 }
