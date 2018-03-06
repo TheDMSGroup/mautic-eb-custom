@@ -5,7 +5,7 @@
             var $widget = $footer.append('<a id="widget-statuspage" href="http://status.dmsengage.com" target="_blank"><span class="color-dot"></span><span class="color-description"></span></a>').find('#widget-statuspage:first');
             if ($widget.length) {
                 $.getScript('https://cdn.statuspage.io/se-v2.js', function () {
-                    var sp = new StatusPage.page({page: '39qnmk3k9q7f'});
+                    var sp = new StatusPage.page({page: 'bqc7czqgqwxm'});
                     sp.summary({
                         success: function (data) {
                             // Adds the text description.
