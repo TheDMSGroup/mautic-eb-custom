@@ -363,3 +363,8 @@ html:not(.hidden-nav) body #CampaignCanvas .campaign-group-container.col-md-6,
 html:not(.hidden-nav) body #CampaignCanvas .campaign-group-container.col-md-4 {
   min-width: 50%;
 }
+
+// Always show the action group, even under integrations - ENG-131
+html:not(.hidden-nav) body #CampaignCanvas .campaign-group-container.hide#ActionGroupSelector.hide {
+  display: block !important;
+}
