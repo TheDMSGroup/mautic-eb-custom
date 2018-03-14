@@ -26,10 +26,10 @@ Mautic.generatePageTitle = function (route) {
         // Encoded entites are decoded by this process and can cause a XSS
         currentModuleItem = mQuery('<div>' + currentModuleItem + '</div>').text();
 
-        mQuery('title').html(currentModule[0].toUpperCase() + currentModule.slice(1) + ' | ' + currentModuleItem + ' | engage');
+        mQuery('title').html(currentModule[0].toUpperCase() + currentModule.slice(1) + ' | ' + currentModuleItem + ' | DMS Engage');
     }
     else {
         //loading basic title
-        mQuery('title').html(mQuery('.page-header h3').html() + ' | engage');
+        mQuery('title').html(mQuery('.page-header h3').html() + ' | DMS Engage');
     }
 };
