@@ -136,6 +136,7 @@ footer#app-footer .row .text-muted:nth-child(1):before {
 footer#app-footer .row .text-right {
   font-size: 10px;
 }
+
 footer#app-footer .row .text-right:hover:before {
   -webkit-transition: all .3s;
   -moz-transition: all .3s;
@@ -144,6 +145,7 @@ footer#app-footer .row .text-right:hover:before {
   transition: all .3s;
   opacity: 1;
 }
+
 footer#app-footer .row .text-right:before {
   -webkit-transition: all .3s;
   -moz-transition: all .3s;
@@ -338,6 +340,26 @@ span.ellipsis {
   min-height: 175px;
 }
 
-.img-responsive  {
+.img-responsive {
   display: inline-block;
+}
+
+// Hide some actions in the campaign action select widget (will not hide them if already in campaign) - ENG-131
+html:not(.hidden-nav) body #CampaignCanvas #ActionList_chosen li.option_campaignEvent_leadscorecontactscompanies, // Add to company's score
+html:not(.hidden-nav) body #CampaignCanvas #ActionList_chosen li.option_campaignEvent_leadaddtocompany, // Add to company action
+html:not(.hidden-nav) body #CampaignCanvas #ActionList_chosen li.option_campaignEvent_leaddeletecontact, // Delete contact
+html:not(.hidden-nav) body #CampaignCanvas #ActionList_chosen li.option_campaignEvent_messagesend, // Send marketing message
+html:not(.hidden-nav) body #CampaignCanvas #ActionList_chosen li.option_campaignEvent_leadchangeowner { // Update contact owner
+  display: none;
+}
+
+// Hide the ability to add new "Decisions" (will not hide them if already in campaign) - ENG-131
+html:not(.hidden-nav) body #CampaignCanvas .campaign-group-container#DecisionGroupSelector {
+  display: none;
+}
+
+// We have 2 items always - ENG-131
+html:not(.hidden-nav) body #CampaignCanvas .campaign-group-container.col-md-6,
+html:not(.hidden-nav) body #CampaignCanvas .campaign-group-container.col-md-4 {
+  min-width: 50%;
 }
