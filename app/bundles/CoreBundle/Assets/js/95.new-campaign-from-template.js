@@ -1,16 +1,20 @@
 // Force the New campaign button to actually clone campaign 1 (a template).
-(function ($) {
-    $(document).ready(function () {
-        var $original = mQuery('#toolbar:first > div.std-toolbar.btn-group:first > a.btn.btn-default[href="/s/campaigns/new"]:first');
-        if ($original.length && $original.find('.fa-plus').length) {
+Mautic.campaignCloneNew = function () {
+    var $original = mQuery('#toolbar:first > div.std-toolbar.btn-group:first > a.btn.btn-default[href="/s/campaigns/new"]:first:not(.hide)');
+    if ($original.length && $original.find('.fa-plus').length) {
 
-            // Create a new new button.
-            var $new = $original.clone(true, true);
-            $new.attr('href', '/s/campaigns/clone/1')
-                .insertAfter($original);
+        // Create a new new button.
+        var $new = $original.clone(true, true);
+        $new.attr('href', '/s/campaigns/clone/1')
+            .insertAfter($original);
 
-            // Hide the original.
-            $original.addClass('hide');
-        }
-    });
-})(mQuery);
+        // Hide the original.
+        $original.addClass('hide');
+    }
+};
+mQuery(document).ready(function () {
+    Mautic.campaignCloneNew();
+});
+mQuery(document).ajaxComplete(function (event, xhr, settings) {
+    Mautic.campaignCloneNew();
+});
