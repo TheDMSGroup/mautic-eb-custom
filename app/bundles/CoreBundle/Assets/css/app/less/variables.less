@@ -370,3 +370,16 @@ html:not(.hidden-nav) body #CampaignCanvas .campaign-group-container.col-md-4 {
 html:not(.hidden-nav) body #CampaignCanvas .campaign-group-container.hide#ActionGroupSelector.hide {
   display: block !important;
 }
+
+// Fix for IE/Firefox scrollbars on PC
+.scroll-wrapper::-webkit-scrollbar {
+  display: none;
+}
+@-moz-document url-prefix() {
+  .scroll-wrapper {
+    overflow: hidden !important;
+  }
+  .scroll-wrapper {
+    overflow-y: scroll;
+  }
+}
