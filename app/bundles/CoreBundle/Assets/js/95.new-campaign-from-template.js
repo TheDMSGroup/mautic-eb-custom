@@ -16,5 +16,7 @@ mQuery(document).ready(function () {
     Mautic.campaignCloneNew();
 });
 mQuery(document).ajaxComplete(function (event, xhr, settings) {
-    Mautic.campaignCloneNew();
+    setTimeout(function(){
+        Mautic.campaignCloneNew();
+    }, 150);
 });
