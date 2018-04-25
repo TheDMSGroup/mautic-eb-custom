@@ -5,7 +5,7 @@ Mautic.campaignCloneNew = function () {
 
         // Create a new new button.
         var $new = $original.clone(true, true);
-        $new.attr('href', '/s/campaigns/clone/1')
+        $new.attr('href', '/s/campaigns/clone/16')
             .insertAfter($original);
 
         // Hide the original.
