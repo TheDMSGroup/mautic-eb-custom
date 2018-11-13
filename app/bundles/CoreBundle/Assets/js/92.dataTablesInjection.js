@@ -72,14 +72,12 @@ Mautic.appendTableToCharts = function () {
                                 headers.push({'title': dataset.label});
                             }
                             row.push(dataset.data[c]);
-
                         });
 
                         rows.push(row);
                     }
 
                     var chartTotals = chart.totals;
-console.log('chart totals before DataTables'); console.log(chartTotals);
                     // invoke dataTables
                     mQuery('#tableForChart-' + index).DataTable({
                         data: rows,
@@ -95,17 +93,14 @@ console.log('chart totals before DataTables'); console.log(chartTotals);
                         ],
                         footerCallback: function (tfoot, data, start, end, display) {
                             try {
-
-console.log('chart totals in callback:'); console.log(chartTotals);
                                 var container = mQuery('#tableForChart-' + index);
                                 var columns = data[0].length;
                                 if (mQuery('tr.detailPageTotal').length === 0) {
                                     var footer = mQuery('<tfoot></tfoot>');
                                     var tr = mQuery('<tr class=\'detailPageTotal\' style=\'font-weight: 600; background: #fafafa;\'></tr>');
                                     tr.append(mQuery('<td>Totals</td>'));
-                                    for (var i = 0; i < columns-1; i++) {
-                                        console.log(i, chartTotals[i]);
-                                        tr.append(mQuery('<td class=\'td-right\'>'+chartTotals[i]+'</td>'));
+                                    for (var i = 0; i < columns - 1; i++) {
+                                        tr.append(mQuery('<td class=\'td-right\'>' + chartTotals[i] + '</td>'));
                                     }
                                     footer.append(tr);
                                     container.append(footer);
@@ -127,14 +122,12 @@ console.log('chart totals in callback:'); console.log(chartTotals);
 };
 
 mQuery(document).ready(function () {
-    // console.log('doc ready');
-    // Mautic.chartSum();
-    // Mautic.appendTableToCharts();
+    Mautic.chartSum();
+    Mautic.appendTableToCharts();
 });
 
 mQuery(document).ajaxComplete(function (event, xhr, settings) {
     setTimeout(function () {
-        console.log('ajax complete');
         Mautic.chartSum();
         Mautic.appendTableToCharts();
     }, 150);
