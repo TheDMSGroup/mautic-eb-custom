@@ -86,7 +86,7 @@ Mautic.appendTableToCharts = function () {
                         searching: false,
                         paging: false,
                         info: false,
-                        dom: '<rBt>',
+                        dom: '<r<B><t>>',
                         buttons: [
                             'excelHtml5',
                             'csvHtml5'
@@ -115,6 +115,22 @@ Mautic.appendTableToCharts = function () {
 
                     // mark chart as table-added
                     chart.tableAdded = true;
+
+                    // add css to make wide tables scrollable
+                    mQuery('#tableForChart-' + index).parent('div').css(
+                        {
+                            'overflow-x': 'scroll',
+                            'margin': '0px -15px -15px -15px',
+                            'min-width': '100%'
+                        }
+                    );
+
+                    // right align the buttons
+                    mQuery('#tableForChart-' + index + '_wrapper .dt-buttons.btn-group').css(
+                        {
+                            'float': 'right'
+                        }
+                    );
                 }
             });
         }
