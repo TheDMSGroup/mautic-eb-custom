@@ -95,7 +95,7 @@ Mautic.appendTableToCharts = function () {
                             try {
                                 var container = mQuery('#tableForChart-' + index);
                                 var columns = data[0].length;
-                                if (mQuery('tr.detailPageTotal').length === 0) {
+                                if (container.find('.detailPageTotal').length === 0) {
                                     var footer = mQuery('<tfoot></tfoot>');
                                     var tr = mQuery('<tr class=\'detailPageTotal\' style=\'font-weight: 600; background: #fafafa;\'></tr>');
                                     tr.append(mQuery('<td>Totals</td>'));
