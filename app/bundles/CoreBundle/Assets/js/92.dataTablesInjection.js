@@ -66,7 +66,8 @@ Mautic.appendTableToCharts = function () {
                     var rows = [];
                     var rowsCount = chart.data.labels.length;
                     for (c = 0; c < rowsCount; c++) {
-                        row = [chart.data.labels[c]];
+                        //Date field, variable format...
+                        let row = [chart.data.labels[c]];
                         mQuery.each(chart.data.datasets, function (i, dataset) {
                             if (c === 0) {
                                 headers.push({'title': dataset.label});
@@ -78,6 +79,18 @@ Mautic.appendTableToCharts = function () {
                     }
 
                     var chartTotals = chart.totals;
+
+                    //setup datatables-moment
+                    mQuery.fn.dataTable.moment('YYYY');
+                    mQuery.fn.dataTable.moment('YYYY');
+                    mQuery.fn.dataTable.moment('YYYY-MM-DD');
+                    mQuery.fn.dataTable.moment('MMMM YYYY');
+                    mQuery.fn.dataTable.moment('MMM D ha');
+                    mQuery.fn.dataTable.moment('MMM D, YY');
+                    mQuery.fn.dataTable.moment('[Week] W');
+                    mQuery.fn.dataTable.moment('HH:mm');
+                    mQuery.fn.dataTable.moment('HH:mm:ss');
+
                     // invoke dataTables
                     mQuery('#tableForChart-' + index).DataTable({
                         data: rows,
