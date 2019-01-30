@@ -82,7 +82,6 @@ Mautic.appendTableToCharts = function () {
 
                     //setup datatables-moment
                     mQuery.fn.dataTable.moment('YYYY');
-                    mQuery.fn.dataTable.moment('YYYY');
                     mQuery.fn.dataTable.moment('YYYY-MM-DD');
                     mQuery.fn.dataTable.moment('MMMM YYYY');
                     mQuery.fn.dataTable.moment('MMM D ha');
