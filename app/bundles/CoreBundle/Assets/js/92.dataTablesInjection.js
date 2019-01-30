@@ -43,7 +43,7 @@ Mautic.chartSum = function () {
 
 // Append dataTables to Charts on Campaign, Source and Client pages.
 Mautic.appendTableToCharts = function () {
-    if ((['contactsource', 'campaign', 'contactclient']).indexOf(mauticContent) > -1) {
+    if ((['contactsource', 'campaign', 'contactclient', 'media']).indexOf(mauticContent) > -1) {
 
         if (
             typeof Mautic.chartObjects !== 'undefined'
