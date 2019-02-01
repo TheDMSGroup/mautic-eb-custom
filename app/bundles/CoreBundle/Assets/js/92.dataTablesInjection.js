@@ -1,71 +1,90 @@
-// Add sums to all chart labels in Mautic.
-Mautic.chartSum = function () {
-    if (
-        typeof Mautic.chartObjects !== 'undefined'
-        && Mautic.chartObjects.length
-    ) {
-        var total, numeric, updated, totalStr;
-        mQuery.each(Mautic.chartObjects, function (i, chart) {
-            updated = false;
-            if (
-                typeof chart.data.datasets !== 'undefined'
-                && (
-                    typeof chart.sumProcessed === 'undefined'
-                    || chart.sumProcessed === false
-                )
-            ) {
-                var totals = [];
-                mQuery.each(chart.data.datasets, function (i, dataset) {
-                    total = 0;
-                    numeric = false;
-                    if (
-                        typeof dataset.data !== 'undefined'
-                        && typeof dataset.label !== 'undefined'
-                    ) {
-                        mQuery.each(dataset.data, function (i, value) {
-                            if (mQuery.isNumeric(value)) {
-                                numeric = true;
-                                total += Number(value);
-                            }
-                        });
-                        if (numeric) {
-                            total = +total.toFixed(2);
-                            totals.push(total);
-                        }
-                    }
-                });
-            }
-
-            chart.totals = totals;
-        });
-    }
-};
-
 // Append dataTables to Charts on Campaign, Source and Client pages.
-Mautic.appendTableToCharts = function () {
-    if ((['contactsource', 'campaign', 'contactclient', 'media']).indexOf(mauticContent) > -1) {
-
+Mautic.appendTableToCharts = function (force) {
+    if (typeof force == 'undefined') {
+        force = false;
+    }
+    // Check the context to ensure we are in a seciong of Mautic
+    // that we wish to enhance with Datatables.
+    if (force || (['contactsource', 'campaign', 'contactclient', 'media']).indexOf(mauticContent) > -1) {
+        if (typeof window.appendTableToChartsMomentConfig == 'undefined') {
+            window.appendTableToChartsMomentConfig = true;
+            if (typeof mQuery.fn.dataTable.moment !== 'undefined') {
+                mQuery.fn.dataTable.moment('YYYY');
+                mQuery.fn.dataTable.moment('YYYY-MM-DD');
+                mQuery.fn.dataTable.moment('MMMM YYYY');
+                mQuery.fn.dataTable.moment('MMM D ha');
+                mQuery.fn.dataTable.moment('MMM D, YY');
+                mQuery.fn.dataTable.moment('[Week] W');
+                mQuery.fn.dataTable.moment('HH:mm');
+                mQuery.fn.dataTable.moment('HH:mm:ss');
+            }
+        }
+        // Check if the current page has Mautic chart objects.
         if (
             typeof Mautic.chartObjects !== 'undefined'
             && Mautic.chartObjects.length
         ) {
-            mQuery.each(Mautic.chartObjects, function (index, chart) {
-
+            // Loop through the charts to generate totals with numerical data.
+            let total, numeric, decimals;
+            mQuery.each(Mautic.chartObjects, function (i, chart) {
                 if (
                     typeof chart.data.datasets !== 'undefined'
-                    && (
-                        typeof chart.tableAdded === 'undefined'
-                        || chart.tableAdded === false
-                    )
+                    && typeof chart.sumProcessed === 'undefined'
                 ) {
+                    chart.sumProcessed = true;
+                    chart.decimals = 0;
+
+                    let totals = [];
+                    mQuery.each(chart.data.datasets, function (i, dataset) {
+                        total = 0;
+                        numeric = false;
+                        if (
+                            typeof dataset.data !== 'undefined'
+                            && typeof dataset.label !== 'undefined'
+                        ) {
+                            mQuery.each(dataset.data, function (i, value) {
+                                if (mQuery.isNumeric(value)) {
+                                    numeric = true;
+                                    decimals = (value + '.').split('.')[1].length;
+                                    if (decimals > chart.decimals) {
+                                        chart.decimals = decimals;
+                                    }
+                                    total += Number(value);
+                                }
+                            });
+                            if (numeric) {
+                                // total = +total.toFixed(2);
+                                totals.push(total);
+                            }
+                        }
+                    });
+                    if (totals) {
+                        chart.totals = totals;
+                    }
+                }
+            });
+
+            // Loop through charts with totals to generate tables.
+            mQuery.each(Mautic.chartObjects, function (index, chart) {
+                if (
+                    typeof chart.tableProcessed === 'undefined'
+                    && typeof chart.totals !== 'undefined'
+                ) {
+                    chart.tableProcessed = true;
+
                     // add the table element for datatables to use
-                    mQuery(chart.chart.canvas.parentElement).closest('.chart-wrapper').append('<table id="tableForChart-' + index + '" class="table table-striped table-bordered no-footer"></table>');
+                    let $table = mQuery(chart.chart.canvas.parentElement)
+                        .closest('.chart-wrapper')
+                        .append('<table id="tableForChart-' + index + '" class="table table-striped table-bordered no-footer" style="min-width: 100%;"></table>')
+                        .find('table#tableForChart-' + index + ':first');
+                    let $chartContainer = $table.parent('div');
 
                     //convert chart dataset to dataTables json
-                    var headers = [{'title': 'Date'}];
-                    var rows = [];
-                    var rowsCount = chart.data.labels.length;
-                    for (c = 0; c < rowsCount; c++) {
+                    let headers = [{'title': 'Date'}],
+                        rows = [],
+                        rowsCount = chart.data.labels.length,
+                        enumeratedColumns = [];
+                    for (let c = 0; c < rowsCount; c++) {
                         //Date field, variable format...
                         let row = [chart.data.labels[c]];
                         mQuery.each(chart.data.datasets, function (i, dataset) {
@@ -78,20 +97,11 @@ Mautic.appendTableToCharts = function () {
                         rows.push(row);
                     }
 
-                    var chartTotals = chart.totals;
-
-                    //setup datatables-moment
-                    mQuery.fn.dataTable.moment('YYYY');
-                    mQuery.fn.dataTable.moment('YYYY-MM-DD');
-                    mQuery.fn.dataTable.moment('MMMM YYYY');
-                    mQuery.fn.dataTable.moment('MMM D ha');
-                    mQuery.fn.dataTable.moment('MMM D, YY');
-                    mQuery.fn.dataTable.moment('[Week] W');
-                    mQuery.fn.dataTable.moment('HH:mm');
-                    mQuery.fn.dataTable.moment('HH:mm:ss');
-
+                    for (let i = 1; i < headers.length; i++) {
+                        enumeratedColumns.push(i);
+                    }
                     // invoke dataTables
-                    mQuery('#tableForChart-' + index).DataTable({
+                    $table.DataTable({
                         data: rows,
                         autoFill: true,
                         columns: headers,
@@ -99,50 +109,71 @@ Mautic.appendTableToCharts = function () {
                         paging: false,
                         info: false,
                         dom: '<r<B><t>>',
-                        buttons: [
-                            'excelHtml5',
-                            'csvHtml5'
+                        buttons: {
+                            buttons: [
+                                {
+                                    extend: 'copy',
+                                    className: 'btn-sm pull-right'
+                                },
+                                {
+                                    extend: 'excelHtml5',
+                                    className: 'btn-sm pull-right'
+                                },
+                                {
+                                    extend: 'csvHtml5',
+                                    className: 'btn-sm pull-right'
+                                }
+                            ]
+                        },
+                        columnDefs: [
+                            {
+                                className: 'text-right',
+                                targets: enumeratedColumns,
+                                render: function (data, type, row) {
+                                    return Number(data).toFixed(chart.decimals);
+                                }
+                            }
                         ],
                         footerCallback: function (tfoot, data, start, end, display) {
                             try {
-                                var container = mQuery('#tableForChart-' + index);
-                                var columns = data[0].length;
-                                if (container.find('.detailPageTotal').length === 0) {
-                                    var footer = mQuery('<tfoot></tfoot>');
-                                    var tr = mQuery('<tr class=\'detailPageTotal\' style=\'font-weight: 600; background: #fafafa;\'></tr>');
-                                    tr.append(mQuery('<td>Totals</td>'));
-                                    for (var i = 0; i < columns - 1; i++) {
-                                        tr.append(mQuery('<td class=\'td-right\'>' + chartTotals[i] + '</td>'));
+                                if ($chartContainer.find('.detailPageTotal').length === 0) {
+                                    let $footer = mQuery('<tfoot></tfoot>'),
+                                        $tr = mQuery('<tr class=\'detailPageTotal\' style=\'font-weight: 600; background: #fafafa;\'></tr>');
+                                    $tr.append(mQuery('<td>Totals</td>'));
+                                    for (let i = 0; i < data[0].length - 1; i++) {
+                                        $tr.append(mQuery('<td class=\'td-right text-right\'>' + Number(chart.totals[i]).toFixed(chart.decimals) + '</td>'));
                                     }
-                                    footer.append(tr);
-                                    container.append(footer);
+                                    $footer.append($tr);
+                                    $table.append($footer);
                                 }
                             }
                             catch (e) {
-                                console.log(e);
+                                console.warn(e);
                             }
                         }
-
                     });
-
-                    // mark chart as table-added
-                    chart.tableAdded = true;
-
-                    // add css to make wide tables scrollable
-                    mQuery('#tableForChart-' + index).parent('div').css(
+                    // Eat up the white space around the table.
+                    $chartContainer.css(
                         {
-                            'overflow-x': 'scroll',
-                            'margin': '0px -15px -15px -15px',
-                            'min-width': '100%'
+                            'margin': '0px -16px -17px -15px',
+                            'min-width': '100%',
+                            'margin-top': '-17px'
                         }
                     );
-
-                    // right align the buttons
-                    mQuery('#tableForChart-' + index + '_wrapper .dt-buttons.btn-group').css(
-                        {
-                            'float': 'right'
-                        }
-                    );
+                    // Align buttons to the right.
+                    $chartContainer.find('.dt-buttons.btn-group')
+                        .css({
+                            'width': '100%',
+                            'padding': '0 17px 5px 0'
+                        });
+                    // Reduce whitespace between the chart and table.
+                    $chartContainer.find('.dataTables_wrapper:first').css({
+                        'margin-top': '-24px'
+                    });
+                    // Side scroll the table on mobile devices.
+                    $chartContainer.find('table:first').parent('div').css({
+                        'overflow-x': 'scroll'
+                    });
                 }
             });
         }
@@ -150,13 +181,10 @@ Mautic.appendTableToCharts = function () {
 };
 
 mQuery(document).ready(function () {
-    Mautic.chartSum();
     Mautic.appendTableToCharts();
-});
-
-mQuery(document).ajaxComplete(function (event, xhr, settings) {
-    setTimeout(function () {
-        Mautic.chartSum();
-        Mautic.appendTableToCharts();
-    }, 150);
+    mQuery(document).ajaxComplete(function (event, xhr, settings) {
+        window.appendTableToChartsTimer = setTimeout(function () {
+            Mautic.appendTableToCharts();
+        }, 200);
+    });
 });
