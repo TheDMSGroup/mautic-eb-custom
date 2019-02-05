@@ -89,7 +89,12 @@ Mautic.appendTableToCharts = function (force) {
                         let row = [chart.data.labels[c]];
                         mQuery.each(chart.data.datasets, function (i, dataset) {
                             if (c === 0) {
-                                headers.push({'title': dataset.label});
+                                if (typeof dataset.borderColor !== 'undefined') {
+                                    headers.push({'title': '<span style="color: ' + dataset.borderColor + '">' + dataset.label + '</span>'});
+                                }
+                                else {
+                                    headers.push({'title': dataset.label});
+                                }
                             }
                             row.push(dataset.data[c]);
                         });
@@ -112,16 +117,16 @@ Mautic.appendTableToCharts = function (force) {
                         buttons: {
                             buttons: [
                                 {
-                                    extend: 'copy',
-                                    className: 'btn-sm pull-right'
+                                    extend: 'csvHtml5',
+                                    className: 'btn-success'
                                 },
                                 {
                                     extend: 'excelHtml5',
-                                    className: 'btn-sm pull-right'
+                                    className: 'btn-success'
                                 },
                                 {
-                                    extend: 'csvHtml5',
-                                    className: 'btn-sm pull-right'
+                                    extend: 'copy',
+                                    className: 'btn-success'
                                 }
                             ]
                         },
@@ -138,8 +143,8 @@ Mautic.appendTableToCharts = function (force) {
                             try {
                                 if ($chartContainer.find('.detailPageTotal').length === 0) {
                                     let $footer = mQuery('<tfoot></tfoot>'),
-                                        $tr = mQuery('<tr class=\'detailPageTotal\' style=\'font-weight: 600; background: #fafafa;\'></tr>');
-                                    $tr.append(mQuery('<td>Totals</td>'));
+                                        $tr = mQuery('<tr class=\'detailPageTotal\'></tr>');
+                                    $tr.append(mQuery('<td>Total</td>'));
                                     for (let i = 0; i < data[0].length - 1; i++) {
                                         $tr.append(mQuery('<td class=\'td-right text-right\'>' + Number(chart.totals[i]).toFixed(chart.decimals) + '</td>'));
                                     }
@@ -152,6 +157,9 @@ Mautic.appendTableToCharts = function (force) {
                             }
                         }
                     });
+
+                    // @todo - Move all this CSS into a CSS file :P
+
                     // Eat up the white space around the table.
                     $chartContainer.css(
                         {
@@ -160,19 +168,73 @@ Mautic.appendTableToCharts = function (force) {
                             'margin-top': '-17px'
                         }
                     );
+
                     // Align buttons to the right.
-                    $chartContainer.find('.dt-buttons.btn-group')
-                        .css({
-                            'width': '100%',
-                            'padding': '0 17px 5px 0'
-                        });
+                    // $chartContainer.find('.dt-buttons.btn-group')
+                    //     .css({
+                    //         'padding': '0 17px 5px 17px'
+                    //     });
+
                     // Reduce whitespace between the chart and table.
-                    $chartContainer.find('.dataTables_wrapper:first').css({
-                        'margin-top': '-24px'
-                    });
+                    $chartContainer.find('.dataTables_wrapper:first')
+                        .css({
+                            'margin-top': '-35px'
+                        });
+
                     // Side scroll the table on mobile devices.
-                    $chartContainer.find('table:first').parent('div').css({
-                        'overflow-x': 'scroll'
+                    $table = $chartContainer.find('table:first');
+                    $table.parent('div')
+                        .css({
+                            'overflow-x': 'scroll'
+                        });
+
+                    // Drop borders on the top.
+                    $table.css({
+                        'border-top-color': 'transparent'
+                    });
+                    $table.find('thead > tr > th').css({
+                        'border-right-color': 'transparent'
+                    });
+
+                    // Hide the body of the table till there is an interaction.
+                    mQuery(this).find('thead > tr > th:first').css({
+                        'opacity': '0'
+                    });
+                    $table.click(function () {
+                        mQuery(this).find('tbody').removeClass('hide');
+                        mQuery(this).find('thead > tr > th:first').css({
+                            'opacity': '1'
+                        });
+                        mQuery(this).find('thead, tfoot').css({
+                            'cursor': 'auto',
+                        });
+                    });
+                    $table.find('tbody').addClass('hide');
+                    if (!mQuery('head:first > #datatables-buttons').length) {
+                        mQuery('head:first').append('<style type="text/css" id="datatables-buttons">' +
+                            '.chart-wrapper:hover .dt-buttons {' +
+                            '   -webkit-transition: opacity .2s ease-in-out;' +
+                            '   -moz-transition: opacity .2s ease-in-out;' +
+                            '   -o-transition: opacity .2s ease-in-out;' +
+                            '   transition: opacity .2s ease-in-out;' +
+                            '   opacity: 1;' +
+                            '} ' +
+                            '.chart-wrapper .dt-buttons {' +
+                            '   -webkit-transition: opacity .2s ease-in-out;' +
+                            '   -moz-transition: opacity .2s ease-in-out;' +
+                            '   -o-transition: opacity .2s ease-in-out;' +
+                            '   transition: opacity .2s ease-in-out;' +
+                            '   opacity: 0;' +
+                            '   z-index: 2;' +
+                            '   margin: 10px;' +
+                            '   position: absolute;' +
+                            '} ' +
+                            '</style>');
+                    }
+                    $table.find('thead, tfoot').css({
+                        'font-weight': '600',
+                        'font-size': 'large',
+                        'cursor': 'pointer'
                     });
                 }
             });
