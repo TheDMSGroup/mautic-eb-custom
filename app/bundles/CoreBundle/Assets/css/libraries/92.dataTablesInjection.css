@@ -1,0 +1,80 @@
+/* Eat up the white space around the table */
+.chart-wrapper.upgraded {
+    min-width: 100%;
+    margin: 0px -16px -17px -15px;
+}
+
+/* Hide the buttons till hover */
+.chart-wrapper.upgraded .dt-buttons {
+    opacity: 0;
+    z-index: 2;
+    position: absolute;
+    bottom: -24px;
+    right: 0;
+}
+
+.chart-wrapper.upgraded .dt-buttons button:nth-child(1) {
+    border-top-left-radius: 0 !important;
+}
+
+.chart-wrapper.upgraded .dt-buttons button:nth-child(4) {
+    border-top-right-radius: 0 !important;
+}
+.chart-wrapper.upgraded .dt-buttons button {
+    border-top-color: transparent;
+}
+
+.chart-wrapper.upgraded:hover .dt-buttons {
+    -webkit-transition: opacity .2s ease-in-out;
+    -moz-transition: opacity .2s ease-in-out;
+    -o-transition: opacity .2s ease-in-out;
+    transition: opacity .2s ease-in-out;
+    opacity: 1;
+    /*-webkit-box-shadow: 0 0 10px 10px rgba(255, 255, 255, .5);*/
+    /*box-shadow: 0 0 10px 10px rgba(255, 255, 255, .5);*/
+}
+
+/* Increase font size for header and footer */
+.chart-wrapper.upgraded .dataTables_wrapper > div:nth-child(1) table.dataTable thead,
+.chart-wrapper.upgraded .dataTables_wrapper > div:nth-child(1) table.dataTable tfoot {
+    font-weight: 600;
+    font-size: large;
+}
+
+/* Reduce whitespace between the chart and table.*/
+.chart-wrapper.upgraded .dataTables_wrapper {
+    margin-top: -30px;
+}
+
+/* Side scroll the table on mobile devices.*/
+.chart-wrapper.upgraded .dataTables_wrapper > div:nth-child(1) {
+    overflow-x: scroll;
+    overflow-y: scroll;
+}
+
+/* Drop the borders on the top of the table */
+.chart-wrapper.upgraded .dataTables_wrapper > div:nth-child(1) table.dataTable {
+    border-top-color: transparent;
+}
+
+.chart-wrapper.upgraded .dataTables_wrapper > div:nth-child(1) table.dataTable thead > tr > th {
+    border-right-color: transparent;
+}
+
+/* Hide Date till there is interaction. */
+.chart-wrapper.upgraded .dataTables_wrapper > div:nth-child(1) table.dataTable thead > tr > th:nth-child(1) {
+    opacity: 0;
+}
+
+.chart-wrapper.upgraded .dataTables_wrapper > div:nth-child(1) table.dataTable.expanded thead > tr > th:nth-child(1) {
+    opacity: 1;
+}
+
+/* Hide the body till expanded */
+.chart-wrapper.upgraded .dataTables_wrapper > div:nth-child(1) table.dataTable tbody {
+    display: none;
+}
+
+.chart-wrapper.upgraded .dataTables_wrapper > div:nth-child(1) table.dataTable.expanded tbody {
+    display: table-row-group;
+}
