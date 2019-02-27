@@ -23,9 +23,9 @@
     <?php echo $view->render('MauticCoreBundle:Default:script.html.php'); ?>
     <?php $view['assets']->outputHeadDeclarations(); ?>
 </head>
-<body>
+<body id="mautic-eb-login">
 <section id="main" role="main">
-    <div class="container" style="margin-top:100px;">
+    <div class="container" id="mautic-eb-login-container">
         <div class="row">
             <div class="col-lg-4 col-lg-offset-4">
                 <div class="panel" name="form-login">
@@ -46,15 +46,18 @@
                             <?php echo $view->render('MauticCoreBundle:Notification:flashes.html.php'); ?>
                         </div>
                         <?php $view['slots']->output('_content'); ?>
+                        <div class="text-center text-muted">
+                            <?php echo $view['translator']->trans('Copyright © %date% Digital Media Solutions Group', ['%date%' => date('Y')]); ?>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-         <div class="row">
-            <div class="col-lg-4 col-lg-offset-4 text-center text-muted">
-                <?php echo $view['translator']->trans('mautic.core.copyright', ['%date%' => date('Y')]); ?>
-            </div>
-        </div>
+<!--         <div class="row">-->
+<!--            <div class="col-lg-4 col-lg-offset-4 text-center text-muted">-->
+<!--                --><?php //echo $view['translator']->trans('mautic.core.copyright', ['%date%' => date('Y')]); ?>
+<!--            </div>-->
+<!--        </div>-->
     </div>
 </section>
 <?php echo $view['security']->getAuthenticationContent(); ?>
