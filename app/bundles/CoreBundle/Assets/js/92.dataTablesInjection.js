@@ -134,7 +134,7 @@ Mautic.appendTableToCharts = function (force) {
                                 },
                                 {
                                     text: '<i class="fa fa-plus"></i> Expand',
-                                    className: 'btn-success',
+                                    className: 'btn-default',
                                     action: function (e, dt, node, config) {
                                         let $t = mQuery(node).parent().parent().parent().find('table.dataTable:first');
                                         $t.toggleClass('expanded');

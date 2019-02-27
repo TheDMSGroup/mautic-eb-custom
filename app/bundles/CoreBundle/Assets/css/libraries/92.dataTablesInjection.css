@@ -48,10 +48,11 @@
 
 /* Side scroll the table on mobile devices.*/
 .chart-wrapper.upgraded .dataTables_wrapper > div:nth-child(1) {
-    overflow-x: scroll;
-    overflow-y: scroll;
+     overflow-x: auto;
 }
-
+.chart-wrapper.upgraded .dataTables_wrapper > div:nth-child(1)::-webkit-scrollbar {
+    display: none;
+}
 /* Drop the borders on the top of the table */
 .chart-wrapper.upgraded .dataTables_wrapper > div:nth-child(1) table.dataTable {
     border-top-color: transparent;
