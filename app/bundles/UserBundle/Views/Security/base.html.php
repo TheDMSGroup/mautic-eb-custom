@@ -25,6 +25,9 @@
 </head>
 <body id="mautic-eb-login">
 <section id="main" role="main">
+    <div id="main-panel-flash-msgs">
+        <?php echo $view->render('MauticCoreBundle:Notification:flashes.html.php'); ?>
+    </div>
     <div class="container" id="mautic-eb-login-container">
         <div class="row">
             <div class="col-lg-4 col-lg-offset-4">
@@ -41,9 +44,6 @@
                             <polygon class="m-arrow" points="84.982,31.157 88.004,34.176 63.933,59.605 43.446,38.475 31.664,87.332 42.621,87.332
                             49.122,60.198 63.933,76.399 95.699,41.815 98.738,44.875 101.75,27.784 "/>
                             </svg>
-                        </div>
-                        <div id="main-panel-flash-msgs">
-                            <?php echo $view->render('MauticCoreBundle:Notification:flashes.html.php'); ?>
                         </div>
                         <?php $view['slots']->output('_content'); ?>
                         <div class="text-center text-muted">

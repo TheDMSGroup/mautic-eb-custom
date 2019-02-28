@@ -127,8 +127,18 @@ body #main #mautic-eb-login-container.container > .row:nth-child(1) > div {
 body #main #mautic-eb-login-container.container .panel[name="form-login"] {
   max-width: 355px;
   margin: 0 auto;
-  box-shadow: 5px 3px 3px #f3f3f3;
-  background-color: rgba(255, 255, 255, .95);
+  box-shadow: 40px 40px 40px rgba(0, 0, 0, .1);
+}
+
+body #main #mautic-eb-login-container.container .panel[name="form-login"].submitted {
+  transform: scale(.9);
+  opacity: .95;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, .2);
+  -webkit-transition: all 600ms ease-in-out;
+  -moz-transition: all 600ms ease-in-out;
+  -ms-transition: all 600ms ease-in-out;
+  -o-transition: all 600ms ease-in-out;
+  transition: all 600ms ease-in-out;
 }
 
 // Add the Engage logo for internal pages.
@@ -498,7 +508,7 @@ html:not(.hidden-nav) body #CampaignCanvas .campaign-group-container.hide#Action
   overflow: hidden;
   width: 100%;
   height: 100%;
-  opacity: .8;
+  opacity: .76;
   z-index: -1;
 }
 
