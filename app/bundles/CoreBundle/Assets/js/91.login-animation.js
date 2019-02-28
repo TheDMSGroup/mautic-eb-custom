@@ -14,7 +14,7 @@
                     anime({
                         targets: pathEl,
                         strokeDashoffset: [offset, 0],
-                        duration: anime.random(600, 3000),
+                        duration: anime.random(1000, 4000),
                         delay: anime.random(0, 3000),
                         loop: true,
                         direction: 'alternate',

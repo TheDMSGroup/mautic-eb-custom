@@ -34,7 +34,7 @@
                 <div class="panel" name="form-login">
                     <div class="panel-body">
                         <div class="mautic-logo img-circle mb-md text-center">
-                            <svg version="1.1" class="mautic-logo-figure" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
+                            <?php /* <svg version="1.1" class="mautic-logo-figure" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
                             <path class="circle" d="M64,119.843c-30.937,0-56.108-25.17-56.108-56.108C7.893,32.799,33.063,7.629,64,7.629
                             c7.474,0,14.734,1.446,21.578,4.301c1.936,0.807,2.85,3.03,2.041,4.964c-0.805,1.937-3.029,2.849-4.963,2.043
                             C76.742,16.472,70.465,15.221,64,15.221c-26.751,0-48.514,21.763-48.514,48.514c0,26.752,21.763,48.516,48.514,48.516
@@ -43,7 +43,7 @@
                             <polygon class="m" points="88.545,57.987 79.807,67.055 84.664,87.332 95.621,87.332 "/>
                             <polygon class="m-arrow" points="84.982,31.157 88.004,34.176 63.933,59.605 43.446,38.475 31.664,87.332 42.621,87.332
                             49.122,60.198 63.933,76.399 95.699,41.815 98.738,44.875 101.75,27.784 "/>
-                            </svg>
+                            </svg> */ ?>
                         </div>
                         <?php $view['slots']->output('_content'); ?>
                         <div class="text-center text-muted">
@@ -53,11 +53,11 @@
                 </div>
             </div>
         </div>
-<!--         <div class="row">-->
-<!--            <div class="col-lg-4 col-lg-offset-4 text-center text-muted">-->
-<!--                --><?php //echo $view['translator']->trans('mautic.core.copyright', ['%date%' => date('Y')]); ?>
-<!--            </div>-->
-<!--        </div>-->
+        <?php /* <div class="row">
+            <div class="col-lg-4 col-lg-offset-4 text-center text-muted">
+                <?php echo $view['translator']->trans('mautic.core.copyright', ['%date%' => date('Y')]); ?>
+            </div>
+        </div> */ ?>
     </div>
 </section>
 <?php echo $view['security']->getAuthenticationContent(); ?>
