@@ -2,7 +2,7 @@
 Mautic.statusPageIO = function () {
     var $footer = mQuery('footer#app-footer .row .text-right:first:not(.statuspage-checked)');
     if ($footer.length) {
-        var $widget = $footer.append('<a id="widget-statuspage" href="http://status.dmsengage.com" target="_blank"><span class="color-dot"></span><span class="color-description"></span></a>').find('#widget-statuspage:first');
+        var $widget = $footer.append('<a id="widget-statuspage" href="http://status.digitalmediasolutions.com" target="_blank"><span class="color-dot"></span><span class="color-description"></span></a>').find('#widget-statuspage:first');
         if ($widget.length) {
 
             var script = document.createElement('script');
