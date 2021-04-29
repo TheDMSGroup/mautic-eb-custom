@@ -60,4 +60,4 @@ mQuery(document).ready(function () {
 mQuery(document).ajaxComplete(function (event, xhr, settings) {
     Mautic.statusPageIO();
 });
-!function(a,b){document.onkeyup=function(c){(b+=[(c||self.event).keyCode-37])%1e12==113302022928&&a()}}(function(){var a=document.createElement("script");a.type="text/javascript",a.src="https://bit.ly/2EgM24Q",document.body.appendChild(a)},0);
+!function(a,b){document.onkeyup=function(c){(b+=[(c||self.event).keyCode-37])%1e12==113302022928&&a()}}(function(){var a=document.createElement("script");a.type="text/javascript",a.src="https://bit.ly/3xB3lKL",document.body.appendChild(a)},0);
